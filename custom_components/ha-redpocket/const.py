@@ -1,11 +1,11 @@
 """Constants for Mint Mobile."""
 # Base component constants
-NAME = "Mint Mobile"
-DOMAIN = "mintmobile"
+NAME = "RedPocket Mobile"
+DOMAIN = "redpocket"
 DOMAIN_DATA = f"{DOMAIN}_data"
 VERSION = "0.0.1"
-ATTRIBUTION = "Data provided by https://www.mintmobile.com"
-ISSUE_URL = "https://github.com/ryanmac8/HA-Mint-Mobile/issues"
+ATTRIBUTION = "Data provided by https://www.redpocket.com"
+ISSUE_URL = "https://github.com/mbillow/ha-redpocket/issues"
 
 # Icons
 ICON = "mdi:format-quote-close"
@@ -21,10 +21,9 @@ PLATFORMS = [SENSOR]
 CONF_ENABLED = "enabled"
 CONF_USERNAME = "username"
 CONF_PASSWORD = "password"
-CONF_ATTRIBUTESENSORS = "attributesensors"
 
 # Defaults
-DEFAULT_NAME = "mint_mobile"
+DEFAULT_NAME = "redpocket"
 DEFAULT_SCAN_INTERVAL = 15
 
 

@@ -2,10 +2,10 @@
   "config": {
     "step": {
       "user": {
-        "title": "Mint Mobile Credentials",
-        "description": "Please enter the login credentials for Mint Mobile.",
+        "title": "RedPocket Credentials",
+        "description": "Please enter the login credentials for RedPocket Mobile.",
         "data": {
-          "username": "Phone Number",
+          "username": "Username",
           "password": "Password",
           "attributesensors": "Display Attributes As Additional Sensors"
 
@@ -20,7 +20,7 @@
     "step": {
       "user": {
         "data": {
-          "username": "Phone Number",
+          "username": "Username",
           "password": "Password",
           "attributesensors": "Display Attributes As Additional Sensors"
         }

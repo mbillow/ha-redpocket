@@ -1,0 +1,13 @@
+{
+  "domain": "redpocket",
+  "name": "RedPocket Mobile",
+  "documentation": "https://github.com/mbillow/redpocket",
+  "codeowners": ["@mbillow"],
+  "requirements": [
+      "python-redpocket==0.1.1"
+    ],
+  "config_flow": true,
+  "issue_tracker": "https://github.com/mbillow/ha-redpocket/issues",
+  "version": "1.0.0",
+  "iot_class": "cloud_polling"
+}
