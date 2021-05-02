@@ -3,7 +3,7 @@
 NAME = "RedPocket Mobile"
 DOMAIN = "redpocket"
 DOMAIN_DATA = f"{DOMAIN}_data"
-VERSION = "0.0.1"
+VERSION = "2.0.0"
 ATTRIBUTION = "Data provided by https://www.redpocket.com"
 ISSUE_URL = "https://github.com/mbillow/ha-redpocket/issues"
 

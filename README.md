@@ -5,6 +5,7 @@ This is a fork of the [Mint Mobile Home Assistant plugin](https://github.com/rya
 
 This integration creates a group of sensors for each line and displays the remaining balances for the month.
 
+![home assistant entities](https://github.com/mbillow/ha-redpocket/raw/master/.github/images/ha_redpocket_entity_card.png)
 
 ### Sensors Included:
 
@@ -33,3 +34,13 @@ This integration creates a group of sensors for each line and displays the remai
    * On Home Assistant (formerly Hass.io) and Home Assistant Container the final location should be `/config/custom_components/redpocket`
    * On Home Assistant Supervised, Home Assistant Core, and Hassbian the final location should be `/home/homeassistant/.homeassistant/custom_components/redpocket`
 3. Restart your instance.
+
+## Development / Testing
+
+To spin up a test HA instance with the module installed:
+```shell
+docker-compose up -d
+```
+
+Open your browser to `http://localhost:8123` and proceed to install the module on the Integrations page.
+
