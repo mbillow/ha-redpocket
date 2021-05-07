@@ -65,7 +65,6 @@ class RedPocketBaseSensor(Entity):
 
         # Red Pocket Line Information
         self._line: RedPocketLine = line
-        self._last_update = None
 
         # Schedule Update
         self.async_update = Throttle(self._scan_interval)(self.async_update)
@@ -117,7 +116,7 @@ class RedPocketBaseSensor(Entity):
         # Pull additional information from APIs
         try:
             details = await self.hass.async_add_executor_job(self._line.get_details)
-            self.last_updated = self._current_time()
+            self._last_updated = self._current_time()
             return details
         except RedPocketAuthError:
             _LOGGER.error("Unable to update line data, invalid credentials!")
