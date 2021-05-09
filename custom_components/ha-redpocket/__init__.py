@@ -12,7 +12,6 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-
 from .const import (
     CONF_PASSWORD,
     CONF_USERNAME,
@@ -32,7 +31,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup(hass, config_entry):
-    """ Disallow configuration via YAML """
+    """Disallow configuration via YAML"""
 
     return True
 

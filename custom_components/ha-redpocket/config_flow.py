@@ -1,19 +1,14 @@
 """Adds config flow for Mint Mobile."""
 import logging
 from collections import OrderedDict
+from typing import Any, Dict, Optional
 
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
-
 from redpocket import RedPocket, RedPocketAuthError, RedPocketException
-from typing import Dict, Any, Optional
 
-from .const import (
-    CONF_PASSWORD,
-    CONF_USERNAME,
-    DOMAIN,
-)
+from .const import CONF_PASSWORD, CONF_USERNAME, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -47,7 +42,9 @@ class RedPocketFlowHandler(RedPocketBaseFlowHandler, domain=DOMAIN):
         self._data = {}
         self._errors = {}
 
-    async def async_step_user(self, user_input: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def async_step_user(
+        self, user_input: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """Handle a flow initialized by the user."""
         self._errors = {}
 

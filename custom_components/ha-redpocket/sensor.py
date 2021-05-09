@@ -6,20 +6,19 @@ import uuid
 from datetime import timedelta
 from typing import Optional
 
+from homeassistant.const import (
+    CONF_PASSWORD,
+    CONF_USERNAME,
+    STATE_UNAVAILABLE,
+    STATE_UNKNOWN,
+)
 from homeassistant.core import HomeAssistant
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, STATE_UNKNOWN, STATE_UNAVAILABLE
 from homeassistant.helpers.entity import Entity
 from homeassistant.util import Throttle
-
 from redpocket import RedPocket, RedPocketAuthError, RedPocketException
 from redpocket.api import RedPocketLine, RedPocketLineDetails
-from .const import (
-    DEFAULT_NAME,
-    DEFAULT_SCAN_INTERVAL,
-    DOMAIN,
-    ICON,
-    SENSOR,
-)
+
+from .const import DEFAULT_NAME, DEFAULT_SCAN_INTERVAL, DOMAIN, ICON, SENSOR
 
 _LOGGER = logging.getLogger(__name__)
 
