@@ -3,6 +3,7 @@ import datetime
 import logging
 from datetime import timedelta
 from typing import List
+from functools import partial
 
 from homeassistant.const import (
     CONF_PASSWORD,
@@ -39,36 +40,35 @@ async def async_setup_entry(hass, entry, async_add_entities):
     lines: List[RedPocketLine] = await hass.async_add_executor_job(rp.get_lines)
     _LOGGER.info("Found %d associated lines with RedPocket account.", len(lines))
 
+    async def async_update_data(target_line: RedPocketLine) -> RedPocketLineDetails:
+        """Fetch data from API endpoint.
+
+        This is the place to pre-process the data to lookup tables
+        so entities can quickly look up their data.
+        """
+        _LOGGER.debug(
+            "Refreshing line details for line: %s (%s)",
+            target_line.number,
+            target_line.account_id,
+        )
+        try:
+            # Note: asyncio.TimeoutError and aiohttp.ClientError are already
+            # handled by the data update coordinator.
+            return await hass.async_add_executor_job(target_line.get_details)
+        except RedPocketAuthError as err:
+            _LOGGER.error("Unable to update line data, invalid credentials!")
+            raise UpdateFailed from err
+        except RedPocketException as err:
+            _LOGGER.exception("Unable to update line data, unknown error!")
+            raise UpdateFailed from err
+
     for line in lines:
-
-        async def async_update_data() -> RedPocketLineDetails:
-            """Fetch data from API endpoint.
-
-            This is the place to pre-process the data to lookup tables
-            so entities can quickly look up their data.
-            """
-            _LOGGER.debug(
-                "Refreshing line details for line: %s (%s)",
-                line.number,
-                line.account_id,
-            )
-            try:
-                # Note: asyncio.TimeoutError and aiohttp.ClientError are already
-                # handled by the data update coordinator.
-                return await hass.async_add_executor_job(line.get_details)
-            except RedPocketAuthError as err:
-                _LOGGER.error("Unable to update line data, invalid credentials!")
-                raise UpdateFailed from err
-            except RedPocketException as err:
-                _LOGGER.exception("Unable to update line data, unknown error!")
-                raise UpdateFailed from err
-
         coordinator = DataUpdateCoordinator(
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
             name=f"redpocket line {line.number} sensor",
-            update_method=async_update_data,
+            update_method=partial(async_update_data, line),
             # Polling interval. Will only be polled if there are subscribers.
             update_interval=timedelta(minutes=DEFAULT_SCAN_INTERVAL),
         )
