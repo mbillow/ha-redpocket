@@ -1,4 +1,4 @@
-"""Sensor platform for Mint Mobile."""
+"""Sensor platform for RedPocket."""
 import datetime
 import logging
 from datetime import timedelta
@@ -23,6 +23,7 @@ from redpocket.api import RedPocketLine, RedPocketLineDetails
 from .const import DEFAULT_NAME, DEFAULT_SCAN_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
+STATE_UNLIMITED = "Unlimited"
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -139,9 +140,10 @@ class RedPocketBaseSensor(CoordinatorEntity):
         if (
             not self.coordinator.data
             or not self._detail_key
-            or getattr(self.coordinator.data, self._detail_key) == -1
         ):
             return STATE_UNAVAILABLE
+        if getattr(self.coordinator.data, self._detail_key) == -1:
+            return STATE_UNLIMITED
         return getattr(self.coordinator.data, self._detail_key)
 
     @staticmethod
